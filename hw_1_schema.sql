@@ -72,6 +72,16 @@ create table players(
   foreign key(eid) references employees(eid)
 );
 
+drop table scores_in cascade constraints;
+create table scores_in (
+	pid number,
+	gid number,
+	score number,
+	constraint scores_in_key primary key (pid, gid),
+	foreign key(pid) references players(eid),
+	foreign key(gid) references games(gid)
+)
+
 drop table coaches cascade constraints;
 create table coaches(
   eid number primary key,
