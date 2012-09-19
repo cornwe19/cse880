@@ -1,0 +1,92 @@
+a) Names of those players who live in the same city as their teams.
+
+SELECT players.name
+FROM players, teams, employees
+WHERE employees.eid=players.eid AND
+	  employees.tid=teams.tid AND 
+	  teams.cid=employees.cid;
+	  
+b) Names of those teams who have not scored any in a game
+
+SELECT teams.name
+FROM teams, employees, players, scores_in
+WHERE employees.eid=players.eid AND
+	  employees.tid=teams.tid AND
+	  scores_in.pid=players.eid
+GROUP BY teams.name
+HAVING SUM(scores_in.score)=0;
+
+c)Names of those players in NBA (league) who have endorsements
+of amounts >= $1,000,000.00. Include the players’ average scores,
+team names and the endorsing companies.
+
+SELECT employees.name, AVG(scores_in.score), teams.name, companies.name
+FROM employees, players, endorses, companies, scores_in, teams
+WHERE employees.eid=players.eid AND
+	  teams.tid=employees.tid AND
+	  scores_in.pid=players.eid AND
+	  endorses.eid=players.eid AND
+	  endorses.coid=companies.coid AND
+	  endorses.amount>=1000000
+GROUP BY employees.name, teams.name, companies.name;
+
+d)Three highest scoring players in each game, the teams played in
+the game, dates played and the stadium they played at.
+
+SELECT employees.name, teams.name, games.game_date, stadiums.name
+FROM employees, scores_in, teams, games, stadiums
+WHERE employees.eid=scores_in.pid AND
+      teams.tid=employees.tid AND
+	  games.gid=scores_in.gid AND
+	  EXISTS (
+		SELECT *
+		FROM scores_in si1
+		WHERE si1.gid=scores_in.gid AND
+			  ROWNUM<=1
+		ORDER BY si1.score DESC
+	  );
+	  
+e) Each player and his team in NBA, comparing his average score of
+year 2006 with average score of 2007.
+
+CREATE OR REPLACE PROCEDURE getAverageScores(
+	i_pid IN number,
+	o_2006avg number,
+	o_2007avg number )
+IS
+BEGIN
+
+SELECT AVG( scores_in.score )
+INTO o_2006avg
+FROM scores_in, games
+WHERE scores_in.pid=i_pid AND
+	  scores_in.gid=games.gid AND
+	  games.game_date BETWEEN TO_DATE( '2006-JAN-01', 'YYYY-MON-DD' ) AND TO_DATE( '2006-DEC-31', 'YYYY-MON-DD' )
+GROUP BY employees.name, teams.name;
+
+SELECT AVG( scores_in.score )
+INTO o_2007avg
+FROM scores_in, games
+WHERE scores_in.pid=i_pid AND
+	  scores_in.gid=games.gid AND
+	  games.game_date BETWEEN TO_DATE( '2007-JAN-01', 'YYYY-MON-DD' ) AND TO_DATE( '2007-DEC-31', 'YYYY-MON-DD' )
+GROUP BY employees.name, teams.name;
+
+END;
+
+DECLARE
+	temp_2006avg number;
+	temp_2007avg number;
+BEGIN
+	FOR cursor IN (
+		SELECT players.name pname, teams.name tname, players.eid pid
+		FROM players, teams, employees
+		WHERE players.eid=employees.eid AND
+			  employees.tid=teams.tid )
+	LOOP
+		getAvgScores( cursor.pid, temp_2006avg, temp_2007avg );
+		DBMS_OUTPUT.PUT_LINE('Player ' || cursor.pname || ' Team: ' || cursor.tname ||
+							 ' 2006: ' || temp_2006avg || ' 2007 ' || temp_2007avg );
+	END LOOP;
+END;
+			  

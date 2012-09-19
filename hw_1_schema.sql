@@ -39,7 +39,7 @@ create table plays_in (
 	constraint plays_in_id primary key (gid, tid),
 	foreign key (gid) references games(gid),
 	foreign key (tid) references teams(tid)
-)
+);
 
 drop table games cascade constraints;
 create table games(
@@ -61,6 +61,9 @@ create table employees(
   tid number not null,
   start_date date,
   annual_salary number,
+  country_code number,
+  area_code number,
+  phone_number number,
   foreign key(cid) references cities(cid),
   foreign key(tid) references teams(tid)
 );
@@ -80,7 +83,7 @@ create table scores_in (
 	constraint scores_in_key primary key (pid, gid),
 	foreign key(pid) references players(eid),
 	foreign key(gid) references games(gid)
-)
+);
 
 drop table coaches cascade constraints;
 create table coaches(
