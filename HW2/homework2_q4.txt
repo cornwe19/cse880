@@ -1,0 +1,12 @@
+i) Definitions
+Data Cube: A set of related views summarizing aggregate information from the fact table yet using differeint sets of group by parameters to represent the data presented in different ways
+POS Table - Point of sale table. In this paper, this is the fact table
+Fact Table - The non-summarized, complete set of sales information that summarized views use to aggregate their information
+Dimension table - Tables that store related information to the fact table. For example, information about the stores in which transactions represented by the fact table take place.
+Summary Table - A materialized view that, for the sake of answering aggregate queries quickly, caches aggregate information about the fact table.
+Summary Delta Table - A table that collects deffered changes in a summary table as a result of a change in the fact table. These are intended to save recomputation when applying the same set of changes to a set of summary tables all aggregating similar information from the fact table.
+Summary Tables must be implemented as materialized views in data-warehousing applications becuase if they were implemented as standard views, the entirety of the fact table would need to be queried each time an aggregate function was queried. This would defeat the efficiency that these tables are intended to provide.
+
+ii)
+
+iii)
