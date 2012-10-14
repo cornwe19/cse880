@@ -1,0 +1,38 @@
+1.
+   a) 
+    - The 3rd SELCECT statement is finding a time range Bob's salary didn't change and the first time interval overlaps, but doesn't completely contain the second time interval. It's being used as a mechanism to coalesce the maximal time interval overwhich Bob's salary was unchanged.
+    - The 4th SELECT statement is finding all time ranges that are contained within another interval over which Bob's salary didn't change.
+   b)
+    - START
+    - Iteration 1 (5,25), (8,28), (30,35), (29,36)
+    - Iteration 2 (5,28), (30,35), (29,36)
+    - Iteration 3 (5,28), (30,35), (29,36)
+    - DONE
+    - tuple (30,35) will be removed in the delete statement at the end of the algorithm
+
+2.
+   a) need book - ass.
+
+3. 
+   Initial table
+   ----------------
+   Name        Drug           VST        VET        TST        TET
+   Melanie     Proventil      2009-08-01 now        2009-08-02 uc
+
+   After Insert
+   ----------------
+   Name        Drug           VST        VET        TST        TET
+   Melanie     Proventil      2009-08-01 now        2009-08-02 uc
+   Doodle      Vicosin        2009-09-15 now        2009-09-25 uc
+
+   After Update - Retroactive Update
+   ----------------
+   Name        Drug           VST        VET        TST        TET
+   Melanie     Proventil      2009-08-01 now        2009-08-02 2009-09-25
+   Doodle      Vicosin        2009-09-15 now        2009-09-25 uc
+   Melanie     Proventil      2009-08-01 2009-10-08 2009-09-25 uc
+
+4. needs book - double ass.
+   a)
+   b)
+   c)
