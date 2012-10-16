@@ -11,8 +11,23 @@
     - tuple (30,35) will be removed in the delete statement at the end of the algorithm
 
 2.
-   a) need book - ass.
+   a) 
+      Initial table
+      ---------------
+      Emp     Dept       T
+      --- (NO CHANGE TO JAKE'S ENTRIES) --- 
+      Kate    Ship       {(20,25),...,(20,30),...,(29,25),...,(29,30)}
+      Kate    Accounting {(UC, 30),...,(UC,35)}
+   b)
+      SELECT SNAPSHOT Emp FROM company;
+      Emp     
+      Jake    
+      Kate    
 
+      SELECT Emp FROM company;
+      Emp     VST VET
+      Jake    10  15
+      Kate    30  35
 3. 
    Initial table
    ----------------
