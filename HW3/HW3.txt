@@ -24,6 +24,7 @@
       Jake    
       Kate    
 
+      // TODO: needs updating. I think the temporal elements are wrong.
       SELECT Emp FROM company;
       Emp     VST VET
       Jake    10  15
@@ -47,7 +48,20 @@
    Doodle      Vicosin        2009-09-15 now        2009-09-25 uc
    Melanie     Proventil      2009-08-01 2009-10-08 2009-09-25 uc
 
-4. needs book - double ass.
-   a)
-   b)
-   c)
+4. 
+   a) SELECT Name, Drug, VALID(P)
+      FROM Prescription(Name, Drug)(PERIOD) AS P;
+   b) SELECT SNAPSHOT P1.Name
+      FROM   Prescription(Name, Drug)(PERIOD) AS P1,
+             Prescription(Name, Drug)(PERIOD) AS P2
+      WHERE  P1.Name=P2.Name AND P1.Drug<>P2.Drug AND
+             VALID(P1)=VALID(P2) AND 
+             CAST(VALID(P1) AS INTERVAL MONTH) > INTERVAL '6' MONTH AND
+             VALID(P1) OVERLAPS DATE '2012-10-19';
+   c) SELECT SNAPSHOT BEGIN(TRANSACTION(P2))
+      FROM   Prescription AS P1 P2
+      WHERE  P1.Name='Melanie' AND P2.Name='Melanie' AND
+             VALID(P1) OVERLAPS DATE '2009-09-10' AND
+             VALID(P2) OVERLAPS DATE '2009-09-10' AND
+             TRANSACTION(P1) MEETS TRANSACTION(P2) AND
+             BEGIN(TRANSACTION(P1)) = DATE '2009-09-14';
