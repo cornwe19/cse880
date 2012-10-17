@@ -26,9 +26,9 @@
 
       // TODO: needs updating. I think the temporal elements are wrong.
       SELECT Emp FROM company;
-      Emp     VST VET
-      Jake    10  15
-      Kate    30  35
+      Emp     T
+      Jake    {(
+      Kate    {(20,25),...,(UC,35)}
 3. 
    Initial table
    ----------------
