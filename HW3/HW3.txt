@@ -27,8 +27,8 @@
       // TODO: needs updating. I think the temporal elements are wrong.
       SELECT Emp FROM company;
       Emp     T
-      Jake    {(
-      Kate    {(20,25),...,(UC,35)}
+      Jake    {(5,10),...,(5,15),...,(UC,10),...,(UC,15)}
+      Kate    {(20,25),...,(20,25),...,(UC,30),...,(UC,35)}
 3. 
    Initial table
    ----------------
