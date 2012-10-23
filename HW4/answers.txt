@@ -25,3 +25,33 @@
          tempPaper db_type:type
          ^tempPaper
    .
+
+3.
+   a) SELECT ProjectName: P.name
+      FROM Projects P
+      WHERE EXISTS( SELECT * 
+                    FROM P.work_plan T
+                    WHERE EXISTS( SELECT *
+                                  FROM T.participating G
+                                  WHERE G.name='John'
+                                )
+                    OR T.leader.name='John' );
+
+   b) SELECT Documents: ( SELECT d.name FROM P.document d )
+      FROM Projects P
+      WHERE EXISTS ( SELECT * 
+                     FROM P.work_plan T
+                     WHERE T.description_task='Database design' );
+
+   c) SELECT UNIQUE ProjectName: P.name
+      FROM Projects P, P.work_plan T
+      WHERE COUNT( SELECT * 
+                   FROM Articles A, A.author AA
+                   WHERE T.leader.name=AA.name ) >= 10;
+
+   d) SELECT UNIQUE ProjectName: P.name
+      FROM Projects P, P.work_plan T
+      WHERE EXISTS( SELECT * 
+                    FROM Articles A, A.author AA
+                    WHERE T.leader.name=AA.name );
+
