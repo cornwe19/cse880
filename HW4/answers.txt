@@ -1,0 +1,27 @@
+2.
+   DocumentIF subclass 'ResearchPaper'
+      instVarNames: #( 'name', 'published_by' )
+      inDictionary: UserGlobals
+      constraints: #[
+         #[#name, String], 
+         #[published_by, ProjectLeader]
+      ]
+      classmethod:ResearchPaper newName:aName, newPublisher:publisher
+         |tempPaper|
+         tempPaper:= self new
+         tempPaper name:aName published_by:publisher
+         ^tempPaper
+   .
+
+   ResearchPaper subclass 'DBResearchPaper'
+      instVarNames: #( 'db_type' )
+      inDictionary: UserGlobals
+      constraints #[
+         #[#db_type, String]
+      ]
+      classmethod:DBResearchPaper newName:aName, newPublisher:publisher, newType:type
+         |tempPaper|
+         tempPaper:= super newName:aName, newPublisher:publisher
+         tempPaper db_type:type
+         ^tempPaper
+   .
