@@ -55,3 +55,7 @@
                     FROM Articles A, A.author AA
                     WHERE T.leader.name=AA.name );
 
+4) 
+   b)
+      i)  Inherited members:
+      ii) Rules and Invariants:
