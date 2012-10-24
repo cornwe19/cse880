@@ -57,5 +57,12 @@
 
 4) 
    b)
-      i)  Inherited members:
-      ii) Rules and Invariants:
+      i) Consul-Employee inherits:
+          - name: string (worker)
+          - salary: int (employee)
+          - work_address_c: string (consultant)
+          - work_address_e: string (employee)
+          - specialization: string (consultant)
+          - emp-no: int (employee)
+          - car: exp-car (redefined in consultant based on type assumption)
+      ii) Distinct name invariant, Single origin invariant, Complete inheritence invariant, Domain compatibility invariant (due to consultant redefinition), Multiple inheritance Rules R1, R2 and R3, and Class hierarchy manipulation rule R10
