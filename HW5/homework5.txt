@@ -1,0 +1,37 @@
+1. 
+   a)
+      /* Employee Type */
+      CREATE OR REPLACE TYPE EMPLOYEETYPE AS OBJECT 
+      (
+         Eno NUMBER,
+         Ename VARCHAR2(50),
+         EAddress VARCHAR2(50)
+      ) NOT INSTANTIABLE NOT FINAL;
+     
+      /* Player Type */
+      CREATE OR REPLACE TYPE PLAYERTYPE UNDER EMPLOYEETYPE 
+      ( 
+         PlayingPosition VARCHAR2(50)
+      ) NOT INSTANTIABLE NOT FINAL;
+      
+      /* Playing Coach Type */
+      CREATE OR REPLACE TYPE PLAYINGCOACHTYPE UNDER PLAYERTYPE 
+      (
+         YearsExperience NUMBER
+      ) FINAL;
+      
+   b)
+      CREATE TABLE Players (
+         player PlayerType
+      );
+
+      INSERT INTO Players VALUES ( PlayerType( 1, 'Dennis', 'East Lansing', 'Point Guard' ) );
+
+      INSERT INTO Players VALUES ( PlayingCoachType( 2, 'Charles', 'East Lansing', 'Forward', 3 ) );
+
+   c)
+      ALTER TABLE Players MODIFY COLUMN Player NOT SUBSTITUTABLE AT ALL LEVELS;
+
+   d)
+      Tuples of type PlayerType cannot be inserted into tables of PlayingCoachType.
+
