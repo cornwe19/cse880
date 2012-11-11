@@ -16,21 +16,17 @@ create or replace type PlayerType as object (
 create or replace type PlayerTableRefType as table of ref PlayerType;
 /
 
-create or replace  type TeamType as object (
-
-/********
-Add HERE
-********/
-
+create or replace  type TeamType as object
+(
+   name VARCHAR2(50),
+   players PlayerTableRefType
 );
 /
 
-create or replace  type PlayerScoreType as object (
-
-/********
-ADD HERE
-********/
-
+create or replace  type PlayerScoreType as object
+(
+   player PlayerType,
+   score NUMBER
 );
 /
 
@@ -74,16 +70,53 @@ create or replace Type GameType as Object
 We can define the type GameType which has attributes team1Score and team2Score 
 which are of table types.  When we define a table of GameType we need to 
 indicate nested as follows:
-******
+******/
 
 
 drop table Games;
 create table Games of GameType
-nested table team1Score store as team1ScoreTableRef
-nested table team2Score store as team2ScoreTableRef;
+   nested table team1Score store as team1ScoreTableRef
+   nested table team2Score store as team2ScoreTableRef;
+create or replace type LeagueType as Object
+(
+   lid VARCHAR(10),
+   lname VARCHAR(50),
+   lteams TeamTableRefType
+);
+/
+
+create or replace Type GameType as Object
+(
+   gid VARCHAR, 
+   Stadium StadiumType,
+   team1 REF TeamType,
+   team2 REF TeamType,
+   team1Score PlayerScoreTableRefType,
+   team2Score PlayerScoreTableRefType,
+   MEMBER FUNCTION getMaxScore RETURN NUMBER,
+   -- returns highest score of players in the game
+
+   MEMBER FUNCTION getWinnerRETURN VARCHAR2
+   -- return team ID of the winning team of the  game.
+
+   PRAGMA RESTRICT_REFERENCES(getMaxScore, WNDS),
+   PRAGMA RESTRICT_REFERENCES(getWinner, WNDS),
+);
+/
+/******
+We can define the type GameType which has attributes team1Score and team2Score 
+which are of table types.  When we define a table of GameType we need to 
+indicate nested as follows:
+******/
 
 
-**********
+drop table Games;
+create table Games of GameType
+   nested table team1Score store as team1ScoreTableRef
+   nested table team2Score store as team2ScoreTableRef;
+
+
+/**********
 or we could define the table directly as follows:
 **********
 
@@ -205,5 +238,5 @@ create table Agents of AgentType;
 
 create Table Companies of CompanyType
 nested table coagents STORE AS CoAgentScoreTable
-nested Table co[layers STORE AS CoPlayersTable;
+nested Table coplayers STORE AS CoPlayersTable;
 
