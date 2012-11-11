@@ -146,3 +146,6 @@ create or replace type BODY GameType AS
    END getMaxScore;
 END;
 /
+
+create table Leagues of LeagueType
+nested table lteams STORE AS LeagueTeamsTable;

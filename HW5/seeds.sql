@@ -62,4 +62,29 @@ insert into Games
    from TeamTable t1, TeamTable t2
    where t1.name='EL' and t2.name='AA';
 
+/*
+insert into Games
+   select 'game2', StadiumType( 's2', 'The Palace', ref( t2 ) ), 
+         ref( t1 ), ref( t2 ),
+         CAST( MULTISET( 
+            select ref( pst ) 
+            from PlayerScoreTable pst 
+            where pst.player.pid < 4
+         ) as PlayerScoreTableRefType ),
+         CAST( MULTISET(
+            select ref( pst )
+            from PlayerScoreTable pst
+            where pst.player.pid > 3 and pst.player.pid <> 5
+         ) as PlayerScoreTableRefType )
+   from TeamTable t1, TeamTable t2
+   where t1.name='EL' and t2.name='AA';
+*/
+
+-- Leagues
+insert into Leagues values ( 'l1', 'A', 
+   CAST( MULTISET(
+         select ref( TT )
+         from TeamTable TT
+   ) as TeamTableRefType ) );
+
 commit;
