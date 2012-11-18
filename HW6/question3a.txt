@@ -1,0 +1,63 @@
+3.a
+   base KNN query:
+
+      SELECT * 
+      FROM ( 
+         SELECT I2.image_name, 
+                ORDImageSignature.evaluateScore( I1.image_sig, I2.image_sig, /*Weights go here*/ ) Feature_Distance
+         FROM cse880images I1, cse880images I2
+         WHERE I1.image_name=/*Query image goes here*/ AND
+               I1.image_name <> I2.image_name
+         ORDER BY Feature_Distance
+      )
+      WHERE rownum <= /*# of nearest neighbors goes here*/;
+
+   categories:
+      1. query image: image11.jpg, category: color orange
+         Weights:
+            color=1.0
+            texture=0
+            shape=0
+            location=0
+         5 most relevant images:
+            1. image4.jpg
+            2. image18.jpg
+            3. image17.jpg
+            4. image6.jpg
+            5. image7.jpg
+      2. query image: image2.jpg, category: stripes
+         Weights:
+            color=0
+            texture=1.0
+            shape=1.0
+            location=0.1
+         5 most relevant images:
+            1. image5.jpg
+            2. image6.jpg
+            3. image3.jpg
+            4. image4.jpg
+            5. image9.jpg
+      3. query image: image17.jpg category: similar faces
+         Weights:
+            color=0
+            texture=0.3
+            shape=1.0
+            location=0.1
+         5 most relevant images:
+            1. image15.jpg
+            2. image20.jpg
+            3. image8.jpg
+            4. image1.jpg
+            5. image21.jpg
+      4. query image: image9.jpg, category: similar environments
+         Weights:
+            color=0
+            texture=0.3
+            shape=1.0
+            location=0.1
+         5 most relevant images:
+            1. image3.jpg
+            2. image12.jpg
+            3. image20.jpg
+            4. image6.jpg
+            5. image14.jpg
