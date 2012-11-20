@@ -1,0 +1,5 @@
+Overview:
+    - Basically a multipurpose, low level, cloud based object storage system
+    - The key is flexibility of the system
+       - intended for use with both large and small store and retrieval operations
+       - flexible across varrying load sizes as well
