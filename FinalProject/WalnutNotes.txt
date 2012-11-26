@@ -7,11 +7,20 @@ Introduction:
        - Walnut seeks to reduce the number of unused resources in these siloed systems by performing all the tasks they perform well with a single reserve of worker nodes
        - helps to provide access to data stored across systems as well
     - omits support for VMs
-    - Primarily targeting servicing the back-end storage for HDFS, MObStor, and PNUTS
 
 Overview:
     - Needs to support the following operations to service HDFS, MObStor and PNUTS
        - Atomic replace (test and set)
        - Atomic, multi-writer append
        - Non-blocking reads
-       - TODO: define/make sense of each of these^
+       - TODO: define/make sense of each of these
+
+Sections to Look at:
+    - Goals/Overview
+       - Intended to support:
+          - HDFS
+          - MObStor
+          - PNUTS
+    - API
+    - Replication
+    - Failure Management
