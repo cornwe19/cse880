@@ -56,3 +56,24 @@
       | {C => D}     |    0.23    |    0.10    |
       | {D => C}     |    0.40    |    0.10    |
       ------------------------------------------
+
+2)
+   a)
+      <graphic>
+   b) 
+      <graphic>
+
+      2 subtrees are generated directly from the initial FP-Tree { (c:1), (d:1) } and { (d:3) }
+   c)
+      Itemsets:
+      ----------------------------
+      | Set          |  Support  |
+      ----------------------------
+      | {B, A, C, D} |   0.01    |
+      | {B, A, D}    |   0.02    |
+      | {B, D}       |   0.18    | <- only frequent combination (min support >= 0.1)
+      | {B, C, D}    |   0.06    |
+      | {A, C, D}    |   0.02    |
+      | {A, D}       |   0.03    |
+      | {C, D}       |   0.01    |
+      ----------------------------
