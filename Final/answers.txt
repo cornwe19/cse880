@@ -178,6 +178,7 @@ The test will falsely report (due to the even number of intersections 1, 2, 3 an
 12.
     a) Minmax distance is the minimum of the maximum distances from the given query point to a particular object in the database. It is intended to provide an upper bound on the distance of the existence of a point from the query point in a given rectangle.
     b) It is calculated to find the closest defining vertex of the rectangular object storing points in the database. Since these rectangles are tightly bound on the points they contain, finding the minimum defining vertex guarantees the existence of a point between the query point and the point defining the MinMax distance.
+
 13.
    a) Read Uncommitted - W1 writes A, R2 reads A before C1 commmits A
    b) Repeatable Read - There is a chance that R1's query for resource A may have applied to resource B when W2 wrote it before C1 committed. This could cause a phantom read which prevents this scenario from being serialized. 
