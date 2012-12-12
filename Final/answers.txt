@@ -11,7 +11,20 @@
 
    b) Provider function:
       provider() {
-         List<item
+         HashMap<Item[],List<String>> map;
+
+         for ( Entry<Item[] itemSet,String> entry in getIntermediateItemEntries() ) { // Assumes a method to read intermediate entries from file system
+            if ( map.contains( entry.key ) {
+               map.get( entry.key ).add( entry.value );
+            } else {
+               map.put( entry.key, new List<String>( entry.value );
+            }
+         }
+
+         for( Entry<Item[], List<String> entry in map.entrySet() ) {
+            reduce( entry.key, entry.value );
+         }
+      }
 
    c) Reduce function:
       // Input: an item patern and a list of transactions that contain it
